@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery.min.js"></script>
+    <script>
+ // (原生js)封装Promise对象和ajax过程
+    // var jsGetAjaxPromise = function(param){
+    //     return new Promise(function(resolve, reject ){
+    //         var xhr = new XMLHttpRequest();
+    //         xhr.open('get', param.url, true);
+    //         xhr.onload = resolve;
+    //         xhr.onerror = reject;
+    //         xhr.send();
+    //     })
+    // }
+
+    // // 调用示例
+    // var p1 = jsGetAjaxPromise({  // 启动第一个任务
+    //     url: 'cross-domain1.txt' // 要获取的文件地址
+    // });
+    // p1.then(function(response){  // 处理第一个异步任务的结果(每次调用then都会返回一个新创建的Promise对象)
+    //     console.log(response);
+    //     return jsGetAjaxPromise({ // 启动第二个任务 
+    //         url: 'cross-domain2.txt'
+    //     })
+    // }).then(function(response2){  // 处理第二个任务的结果
+    //     console.log(response2);
+    //     return jsGetAjaxPromise({ // 启动第三个任务  
+    //         url: 'cross-domain3.txt'
+    //     })
+    // }).then(function(response3){  // 处理第二个任务的结果
+    //     console.log(response3);
+    // }).catch(function(err){
+    //     console.log(err);
+    // });
+
+
+// (jquery)封装Promise对象和ajax过程
+    //    var jqGetAjaxPromise = function(param){
+    //     return new Promise(function(resolve, reject){
+    //         $.ajax({
+    //             url: param.url,
+    //             type: 'get',
+    //             data: param.data || '',
+    //             success: function(data){
+    //                 resolve(data);
+    //             },
+    //             error: function(error){
+    //                 reject(error)
+    //             }
+    //         });
+    //     });
+    // };
+    // 调用示例
+    // var p2 = jqGetAjaxPromise({    
+    //     url: 'cross-domain1.txt'
+    // });
+    // p2.then(function(data){      
+    //     console.log(data);
+    //     return jqGetAjaxPromise({  
+    //         url:'cross-domain2.txt'
+    //     });
+    // }).then(function(data2){   
+    //     console.log(data2);
+    // }).catch(function(err){
+    //     console.log(err);
+    // });
+
+    console.log(typeof null);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

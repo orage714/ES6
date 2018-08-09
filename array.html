@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array</title>
+    <script>
+//ES5新增的循环
+// 1:arr.forEach()//就是for循环的简写
+// 2:arr.map()//整理数据并且返回（return）
+// 3:arr.filter()//过滤 过滤一些不合格“元素”，
+// 4:arr.some()//判断 类似查找返回布尔值
+// 5:arr.every()//判断 数组里面所有元素都要符合条件，才返回true
+//forEach,map,filter,some,every用法都是一模一样，可以两参  (回调函数，this对象)
+
+//6；arr.reduce()//从左往右算数组总和
+// 7：arr.reduceRight()从右往左算数组总和
+//8:ES6新增循环for( of )
+
+    // arr.forEach()
+                // let arr=['apple','banana','orange','tomato'];
+                //    arr.forEach(function(val){
+                //         console.log(val)
+                //     }); 
+
+
+    //map()方法
+                //1；非常有用，做数据交互“映射”
+                //2；须配合return使用，返回一个新数组
+                // 若没有return，就相当于forEach
+            //注：平时使用map一定要有return
+                // let arr=[
+                //     {title:"aaa",read:1000,hot:true},
+                //     {title:"bbb",read:2000,hot:true},
+                //     {title:"ccc",read:3000,hot:true},
+                //     {title:"ddd",read:4000,hot:true}
+                //     ];
+                    // arr.map((item,index,arr)=>{
+                                    //item单个项目
+                                    //index索引
+                                    //arr返回的对象
+                    //     // console.log(item);
+                    //     console.log(arr)
+                    // })
+                // 用于整理后台数据
+                // let newarr=arr.map((item)=>{
+                //     let json={};
+                //     json.t=`标题：${item.title}`;
+                //     json.r=`时间：${item.read}`;
+                //     json.h=`热度：${item.hot==true && "真棒！！！"}`
+                //                 //item.hot值等于true json.h就是真棒！！！
+                //     return json;
+                // });
+                // console.log(newarr);
+    //filter()过滤
+                // let arr=[
+                //         {title:"aaa",read:1000,hot:true},
+                //         {title:"bbb",read:2000,hot:false},
+                //         {title:"ccc",read:3000,hot:true},
+                //         {title:"ddd",read:4000,hot:false}
+                //         ];
+                // let newarr=arr.filter((item,index,arr)=>{
+                //     return item.hot;
+                // })
+                // console.log(newarr);
+    //some()判断  类似查找,数组里面某一个元素符合条件就返回true
+            // eg1：
+                // let arr=['apple','banana','orange','tomato'];
+                //     let b=arr.some((val,index,arr)=>{
+                //         return val=="orange";
+                //     })
+                //     console.log(b);//true
+                //eg2:
+                // let arr=['apple','banana','orange','tomato'];
+                // function findInArray(arr,item){
+                //     return arr.some((val,index,arr)=>{
+                //         return val==item;
+                        
+                //     })
+                // }
+                // console.log(findInArray(arr,"orange"))
+
+    //every()判断  类似查找,数组里面所有元素符合条件就返回true
+                // let arr=[1,9,7,3,7];
+                // let b=arr.every((val,index,arr)=>{
+                //     return val%2==1;
+                // })
+                // console.log(b);
+    // reduce()从左往右算数组总和
+                // let arr=[1,2,3,4,5,6,7,8,9,10];
+                // let res=arr.reduce((prev,cur,index,arr)=>{
+                //                     //prev上个数，cur下个数
+                //     return prev+cur;//相加
+                //     // return Math.pow(prev,cur);//eg1:prev的cur次幂1在前时候多少次幂都是1
+                //     //ES6新增幂运算符**
+                //     //  return prev**cur
+                // })
+                // console.log(res);
+    // reduceRight()从右往左算数组总和
+                // let arr=[1,2,3,4,5,6,7,8,9,10];
+                // let res=arr.reduceRight((prev,cur,index,arr)=>{
+                //                    //prev上个数，cur下个数
+                // return prev+cur;//相加
+                // return Math.pow(prev,cur);//eg1:prev的cur次幂1在前时候多少次幂都是1
+                    //ES6新增幂运算符**
+                // return prev**cur
+                //     })
+                // console.log(res);
+    //for( of )循环
+        // keys()数组下标
+        // entries()数组某一项
+                // let arr=['apple',"banana",'watch']
+                
+                // for(let val of arr){
+                //     console.log(val);//值
+                // }
+                // for(let index of arr.keys()){
+                //     console.log(index);//索引
+                // }
+                // for(let item of arr.entries()){
+                //     console.log(item)//项目
+                // }
+                // for(let [key,val] of arr.entries()){
+                //     console.log(key,val);//0 "apple"键值对应结构
+                // }
+    </script>
+    <script>
+//Array.from(arr)
+    //作用： 1:将类数组装数组
+    //       2:复制
+            //     let arr=[1,43,12,53,"黄德菊"];
+            // // let newarr=Array.from(arr);//ES6
+            // //          ||等价
+            // let newarr=[].slice.call(arr);//ES5之前
+            //     arr.pop();//尾部删除一个
+            //     newarr.push("年龄：20")//尾部添加
+            //     console.log(arr);
+            //     console.log(newarr);
+//arr.find()查找：找出第一个符合条件的数组成员，如果没啊找到返回underfined
+//arr.findIndex()找的是位置，没找到返回-1
+//arr.fill()填充
+            // let arr=new Array(10);
+            // arr.fill("默认值",1,3);
+            // console.log(arr);//[empty, "默认值", "默认值", empty × 7]
+
+// arr.includes()是否包含
+                // let arr=[1,43,12,53,"黄德菊"];
+                // console.log(arr.includes(53));//true
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

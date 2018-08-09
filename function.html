@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+//函数默认值
+        // function show(a=1,b=4){
+        //     console.log(a,b)
+        // }
+        // show()
+//函数参数默认值已经定义了，不能再使用let const进行定义
+        // function show(a=10){
+        //     let a=909;//错误定义会报错
+        //     console.log(a);
+        // }
+        // show();
+//（···）：扩展运算符和rset运算符
+        //    let arr=['appe','orage','banner'];
+        //    console.log(arr);//数组格式
+        //    console.log(...arr);//扩展开的形式 
+
+        // function show(...arr){
+        //     // console.log(a) //[3,32,235,1,4,1,"你好"]
+        //   return arr.sort();
+        //     // console.log(a.sort())
+        // }
+        //  console.log( show(3,32,235,1,4,1))
+//拷贝数组（1）
+        // let arr=[1,333,4,412,];
+        // let arr1=[...arr];
+        // console.log(arr,arr1);
+//拷贝数组（1）
+        // let arr=[1,333,4,412,];
+        // let arr1=Array.from(arr);//Array.from()用于将两类对象装真正数组
+        // console.log(arr1);
+//箭头函数
+    // let show =()=>43;
+    // let show =(a,b)=>{
+    //     return a+b;
+    // }
+    // console.log(show(12,4))
+        //
+//箭头函数this指向问题
+    // 1：(this是箭头函数定义函数所在对象，不在是运行时的对象)
+    //2:不能使用arguments.使用...
+    //3：不能当构造函数
+     let json={
+        id:1,
+        show1:function(){//不能写箭头函数，因为json的格式为 属性：值
+            alert(this.id)//this指向json id为1
+        },
+       show2:function(){
+           setTimeout(function(){//setTimeOut是window对象
+               alert(this.id)//this指向window underfind(箭头函数定义函数所在对象，不在是运行时的对象)
+           },500)
+       },
+       show3:function(){
+           setTimeout(()=>{
+               alert(this.id);//this指向json 
+           },500)
+       }
+    }
+    // json.show1();//1
+    // json.show2();//underfind
+    json.show3();//1
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

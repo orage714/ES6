@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+   <script>
+//        let a=10;
+//        let  promise=new Promise(function(resolve,reject){
+//            if(a==10){
+//                resolve("resolve");
+//            }else{
+//                reject("reject");
+//            }
+//        });
+// promise.then(res=>{console.log(res);},err=>{console.log(err)})
+//   new Promise().then(rs=>{}).catch(err=>{})
+//   promise.resolve("aa")
+//   Promise.resolve("a ")
+
+
+let p1=Promise.resolve("aaa");
+let p2 =Promise.reject("bbb");
+let p3=Promise.resolve("ccc");
+// Promise.all([p1,p2,p3]).then(res=>{//all全部成功才能返回
+//     // console.log(res);
+//     // let [res1,res2,res3]=res;
+//     // console.log(res1,res2,res3);
+// })
+Promise.race([p1,p2,p3]).then(res=>{//race只要有成功就返回
+    console.log(res);
+    // let [res1,res2,res3]=res;
+    // console.log(res1,res2,res3);
+}).catch(err=>{console.log(err)});
+//模块的引入
+
+
+
+
+
+
+
+
+ </script>
+</head>
+<body>
+
+
+</body>
+<!-- <script>
+    // var sum=0;
+    // let nn=()=>{
+    //     for(let i=0;i<=10;i++){
+    //         sum+=i;
+    //     }
+    //     console.log(sum);
+    // }
+    // nn();
+    let [x, y] = [1, 2, 3];
+x // 1
+y // 2
+
+let [a, [b], d] = [1, [2, 3], 4];
+
+console.log(
+    a // 1
+b // 2
+d
+)
+</script> -->
+</html>
