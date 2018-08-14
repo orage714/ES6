@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>modul</title>
+    <script src="js/babel.min.js"></script>
+    <script src="js/modul.mjs"></script>
+    <script>
+        import {name,info} from ""
+    </script>
+   <script type="module">
+//   import 特点：
+//     1：import可以是相对路径也可是绝对路径
+//     2：import模块只会导入一次。无润你引入几次
+//      3:有提升效果
+//      4：import './modules/1.js'相当在于引文件
+//       5：导出模块内容，如果里面有定时器更改内容，外面也会更改，不像common规范
+// import() 可以实现动态引入 类似node里的require列如if条件引入对应的模块
+    //  就是promise对象还可用then方法
+    // impoort优点：
+    //         1按需加载
+    //         2：可以写在if中加载
+    // 3/ import() 特点：
+//     1：import可以是相对路径也可是绝对路径
+//     2：import模块只会导入一次。无润你引入几次
+//     3：可以动态加载地址(34)
+//     4:还可结合promise使用全部加载成功再执行（44）
+    import('./modules/1.js').then(res=>{
+        console.log(res.a+res.b);
+    })
+let sign=1;
+function config(){
+    switch(sign){
+        case 1: return './mudules/1.js'; break;
+    }
+}
+import(config(1)).then(res=>{
+    $(function(){
+        $('body').css({background:'gray'})
+    })
+})
+Promise.all([
+    import('./modeles/1.js'),
+    import('./modeles/2.js')
+]).then(([mod1,mod2])=>{
+    console.log(mod1);
+    console.log(mod2);
+})
+
+
+   import {name,info} from './module.js';//必须要带花括号除非到模块是export default形式就不用括号
+   import a from './module.js';//export default形式
+   import {name,info} from './module.js';
+   import {n as name,a as age,i as info} from './module.js';
+   import * as mode from './module.js';
+   console.log(mode.a)
+   
+
+        console.log(name ); //false
+        console.log(info); // true
+     </script> 
+</head>
+<body>
+    node --experimental -modules  modul.mjs
+</body>
+</html>

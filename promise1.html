@@ -20,53 +20,24 @@
 //   Promise.resolve("a ")
 
 
-let p1=Promise.resolve("aaa");
-let p2 =Promise.reject("bbb");
-let p3=Promise.resolve("ccc");
-// Promise.all([p1,p2,p3]).then(res=>{//all全部成功才能返回
+// let p1=Promise.resolve("aaa");//将现有的转位promise对象，并且是成工状态
+// let p2 =Promise.reject("bbb");//将现有的转位promise对象，并且是失败状态
+// let p3=Promise.resolve("ccc");
+// Promise.all([p1,p2,p3]).then(res=>{//all全部成功才能返回可用于用户请求全部成功状态
+
 //     // console.log(res);
 //     // let [res1,res2,res3]=res;
 //     // console.log(res1,res2,res3);
 // })
-Promise.race([p1,p2,p3]).then(res=>{//race只要有成功就返回
-    console.log(res);
+// Promise.race([p1,p2,p3]).then(res=>{//race只要有成功就返回
+    // console.log(res);
     // let [res1,res2,res3]=res;
     // console.log(res1,res2,res3);
-}).catch(err=>{console.log(err)});
+// }).catch(err=>{console.log(err)});
 //模块的引入
-
-
-
-
-
-
-
 
  </script>
 </head>
 <body>
-
-
 </body>
-<!-- <script>
-    // var sum=0;
-    // let nn=()=>{
-    //     for(let i=0;i<=10;i++){
-    //         sum+=i;
-    //     }
-    //     console.log(sum);
-    // }
-    // nn();
-    let [x, y] = [1, 2, 3];
-x // 1
-y // 2
-
-let [a, [b], d] = [1, [2, 3], 4];
-
-console.log(
-    a // 1
-b // 2
-d
-)
-</script> -->
 </html>
