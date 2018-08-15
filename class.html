@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+   let aaa='stive';
+   let bbb="method";
+
+//第一种方法
+// 注意：1：class没有提升的功能，用函数可以提升
+//      2：this解构后指向变化
+// class里取值函数（get）,存值函数（set）
+// 矫正this：
+//     1：fn.call(this指向谁，args1,args2……)
+//     2：fn.apply(this指向谁，args1,args2……)
+//     3:fn.bind()
+        // class Person{
+        //     constructor(name,age){//构造方法（函数），调用new自动执行
+        //     console.log(`构造函数执行了${name},${age}`);
+        //     this.name=name;
+        //     this.age=age;
+        //     this.showName=this.showName.bind(this);//矫正this
+        //     }
+        //     showName(){
+        //         return `姓名：${this.name}`
+        //     }
+        //     showAge(){
+        //         return `年龄：${this.age}`
+        //     }
+        //     [aaa+bbb](){
+        //         return "随便。。。。"
+        //     }
+        //     static aaa(){
+        //         return "这是静态方法"//静态方法就是类身上的方法
+        //     }
+        // }
+        // let p1=new Person("菊菊",20);
+        // console.log(p1.showName(),p1.showAge());
+        // let {showName}=p1;//解构之后的this指向window,可用bind矫正（25行）
+        // console.log(showName());//若不矫正是undefind
+        // console.log(Person.aaa());//静态方法调用
+        // console.log(p1[aaa+bbb]());//|| console.log(p1['stivemethod']());//写法是一样的
+//继承
+//ES5中太繁琐
+        // function fa(name){
+        //     this.name=name;
+        // }
+        // fa.prototype.showName=function(){
+        //     return `姓名是：${this.name}`
+        // };
+        // function son(name,skill){
+        //     fa.call(this,name);//继承父类属性
+        // }
+        // son.prototype=new fa();//父类实列给子类原型，才能达到继承父类方法
+        // let stu1=new son('小明',"逃学");//实列化
+        // console.log(stu1.showName());//小明
+ //ES6中简单子类还能有自己的属性方法
+       class fa{
+           constructor(name){
+               this.name=name;   
+           }
+           showName(){
+               return `姓名：${this.name}`
+           }
+       }
+    //子类
+       class son extends fa{
+          constructor(name,skill){
+              super(name);//super指父类
+              this.skill=skill;//子类自己的属性
+          }
+          showSkill(){
+              super.showName();//父类的方法执行
+              return `儿子技能为：${this.skill}`//子类自己的方法
+        //先执行父类的方法在执行自己的代码
+          }
+    };
+
+        let stu1=new son('小明',"逃学");//实列化
+        console.log(stu1.showName());//小明
+        console.log(stu1.showSkill());//逃学
+//第二种方法(表达式)
+    //    const  Person= class{
+    //         constructor(name,age){//构造方法（函数），调用new自动执行
+    //         console.log(`构造函数执行了${name},${age}`);
+    //         this.name=name;
+    //         this.age=age
+    //         }
+    //         showName(){
+    //             return `姓名：${this.name}`
+    //         }
+    //         showAge(){
+    //             return `年龄：${this.age}`
+    //         }
+    //     }
+    //     let p1=new Person("菊菊",20);
+    //     console.log(p1.showName(),p1.showAge());
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
