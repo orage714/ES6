@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽</title>
+    <style>
+        .box{
+            position: absolute;
+            top:0;
+            width:200px;
+            height: 200px;
+            background:#ff0;
+            text-align: center;
+            line-height:200px;
+            color:#f0f;
+        }
+        .left{left:0;}
+        .right{right:0;}
+    </style>
+</head>
+<body>
+    <div id="div1" class="box left">左边盒子</div>
+    <div id="div2" class="box right">右边的盒子</div>
+    <script>
+        class Drag{
+            constructor(id){
+                this.oDiv=document.querySelector(id);
+                this.disX=0;
+                this.disY=0;
+               
+                this.init();
+            }
+            init(){
+                this.oDiv.onmousedown=function(ev){
+                    
+                    this.disX=ev.clientX-this.oDiv.offsetLeft;
+                    this.disY=ev.clientY-this.oDiv.offsetTop;
+                    document.onmousemove=this.fnMove.bind(this);
+                    document.onmouseup=this.fnup.bind(this);
+              
+                    return false;//阻止默认事件
+                }.bind(this);//修复this
+            }
+            fnMove(ev){
+                this.oDiv.style.left=ev.clientX-this.disX+'px';
+                this.oDiv.style.top=ev.clientY-this.disY+'px';   
+                if(this.oDiv.offsetLeft<=0){
+                this.oDiv.style.left=0
+               }
+               if(this.oDiv.offsetTop<=0){
+                this.oDiv.style.top=0
+               }             
+            }
+            fnup(){
+                document.onmousemove=null;
+                document.onmouseup=null;
+            }
+        }
+       class limitDrag extends Drag{ }
+        //调用
+        new Drag('#div1');
+        new limitDrag('#div2')
+    </script>
+</body>
+</html>
