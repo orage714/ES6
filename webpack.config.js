@@ -18,18 +18,32 @@ module.exports={
     rules:[
       {test:/\.css$/,
        loader:'style-loader!css-loader'},
-       {test: /\.(gif|jpg|png)$/, loader: "url-loader?limit=8192&name=images/[hash:8].[name].[ext]"}]
+      { test: /\.(gif|jpg|png)$/, loader: "url-loader?limit=8192&name=images/[hash:8].[name].[ext]" },
+      {
+        test: /.\js$/,
+        exclude: /node-modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015',
+          'stage-0','react']
+        }
+      },
+      {test: /\.css$/,loader:'stylecss?sourceMap!postcss' },
+      {test: /\.less$/, loader: "style!css!less|postcss"}
+      // {test: /\.sass$/, loader: "style!css!sass|postcss"}
+
+    ]
   },
   plugins:[
     new HtmlWebpackPlugin({
     chunks:['index'],
     filename:'index.html', //每次调用指定生成的html名称
-    template: './tmpl1.html' //模板地址
+    template: './tmp.html' //模板地址
     }),
     new HtmlWebpackPlugin({
       chunks:['index2'],
     filename:'index2.html', //每次调用指定生成的html名称
-    template: './tmpl1.html' //模板地址
+    template: './tmp.html' //模板地址
     })
     ]  
 }
