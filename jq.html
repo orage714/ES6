@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+<!-- 日期插件 -->
+<link href="https://cdn.bootcss.com/pikaday/1.6.1/css/pikaday.min.css" rel="stylesheet">
+<!-- js 放在尾部 -->
+<script src="https://cdn.bootcss.com/pikaday/1.6.1/pikaday.min.js"></script>
+<script>
+	
+	var i18n = { // 本地化 
+                      previousMonth:'上个月',
+                      nextMonth: '下个月',
+                      months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                      weekdays: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+                      weekdaysShort: ['日', '一', '二', '三', '四', '五', '六']
+                 }
+			var picker = new Pikaday({
+				showMonthAfterYear:true,//头部年份在前		
+				i18n: i18n,
+				// isRTL:true,//倒转周
+				yearSuffix:"&nbsp;年",
+				field: document.getElementById('datepicker'),
+				format: 'YYYY/M/D',
+				toString(date, format) {
+
+					const day = date.getDate();
+					const month = date.getMonth() + 1;
+					const year = date.getFullYear();
+					return `${year}-${month}-${day}`;
+				},
+				parse(dateString, format) {
+
+					const parts = dateString.split('/');
+					const day = parseInt(parts[0], 10);
+					const month = parseInt(parts[1] - 1, 10);
+					const year = parseInt(parts[1], 10);
+					return new Date(year, month, day);
+				}
+			});
+		
+</script>
+
+
+</head>
+    <body>
+<!--图片延迟加载插件-->
+<script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+<script>$("img").lazyload({effect: "fadeIn"});</script>
+
+
+<!-- 表单插件 -->
+	<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+   <script>       		
+		/*表单验证及提交*/
+		$().ready(function () {
+		        $("#bookingForm").validate({
+		            errorPlacement: function (error, element) {
+		                $(element).parent().parent().append(error);//异常元素尾部添加span 元素
+		            },
+		            errorElement: "span",
+		            rules: {//需要验证的项目
+		            	project:"required",
+		                name: "required",
+		                sex: "required",
+		                number: {
+		                    required: true,
+		                    digits: true,
+		                },
+		                date: "required",
+		                remark:"required",
+		            },
+		            messages: {//验证失败提示信息
+		            	project:"请选择您要预约的项目",
+		                name: "请填写您的姓名",
+		                sex: "请选择您的性别",
+		                number: {
+		                    required: "请填写您的电话号码",
+		                    digits: "请输入正确的电话号码格式",
+		                },
+		                date: "请选择看房日期",
+		                remark:"请填写相关说明",
+		            },
+		            submitHandler:function(form){
+		                $('button[type="submit"]').attr('disabled','disabled');
+		                var index = layer.load(3, {time: 5000, shade: [0.8	,"#ffffff"],scrollbar: false});
+		                $(form).ajaxSubmit(function (data) {
+		                	layer.close(index);
+	                        if (!data.error) {
+	                        	$(".lcy-form-title").hide();
+	                        	$(".lcy-form-text").hide();
+	                        	$("#bookingForm").remove();
+	                        	$(".lcy-success-note").show();
+	                        } else {
+	                            layer.msg("提交失败请稍后重试");
+	                        }
+		                });
+		            }
+		        });
+		    });
+		    
+		/*日期选择*/
+    		var picker = new Pikaday(
+            {
+                field: document.getElementById('datepicker'),
+                firstDay: 1,
+                minDate: new Date('2018-08-14'),
+                maxDate: new Date('2019-02-10')
+			})
+	
+
+	</script> 
+<!-- //导航条菜单 -->
+    <script>
+
+    $(function(){
+        function scrollGo(btn,obj) {
+				var oGoTo = obj;
+				btn.click(function(obj){
+					$("html,body").animate({scrollTop: oGoTo.offset().top}, 500);
+				});
+			}
+			//绑定事件
+			$(document).ready(function() {
+				$("#lcyAboutBtn").click(function(){//底部到头部
+					$("html,body").animate({scrollTop: 600}, 500);
+				});			
+				scrollGo($("#lcyCyyBtn"),$("#lcyCyy"));
+				scrollGo($("#lcyJssjBtn"),$("#lcyJssj"));
+				scrollGo($("#lcyQylhBtn"),$("#lcyQylh"));	
+				scrollGo($("#lcyBookingBtn"),$(".lcy-foot-bg"));
+			});
+            //top部分按需显示菜单
+			window.onscroll =()=> {				
+				if ($(document).scrollTop() > $(window).height()) {
+					$('.nav-box').addClass('top-fix');
+				}else{
+					$('.nav-box').removeClass('top-fix');
+				}
+			}
+			/*导航栏项目样式监听*/
+			$(document).scroll(function(){
+				//获取滚动条高度
+				var oScrollTop = $(document).scrollTop();
+				//获取项目位置
+				var oQylhHeight = $("#lcyQylh").offset().top;
+				var oJssjHeight = $("#lcyJssj").offset().top;
+				var oCyyHeight = $("#lcyCyy").offset().top;
+				//获取页脚位置
+				var oFootHeight = $(".lcy-foot-bg").offset().top;
+				//获取按钮元素
+				var oAboutBtn = $("#lcyAboutBtn");
+				var oQylhBtn = $("#lcyQylhBtn");
+				var oJssjBtn = $("#lcyJssjBtn");
+				var oCyyBtn = $("#lcyCyyBtn");
+				//按样式名获取所有按钮
+				var oAllBtn = $('.lcy-nav a[class="pull-right"]');
+				if (oScrollTop>=600&&oScrollTop<oCyyHeight) {
+					//首先还原样式
+					oAllBtn.css("color","#ffffff");
+					//设置当前按钮样式
+					oAboutBtn.css("color","#96cb00");
+				} else if (oScrollTop>=oCyyHeight&&oScrollTop<oJssjHeight) {
+					//首先还原样式
+					oAllBtn.css("color","#ffffff");
+					//设置当前按钮样式
+					oCyyBtn.css("color","#96cb00");
+				} else if(oScrollTop>=oJssjHeight&&oScrollTop<oQylhHeight) {
+					//首先还原样式
+					oAllBtn.css("color","#ffffff");
+					//设置当前按钮样式
+					oJssjBtn.css("color","#96cb00");
+				} else if (oScrollTop>=oQylhHeight&&oScrollTop<oFootHeight) {
+					//首先还原样式
+					oAllBtn.css("color","#ffffff");
+					//设置当前按钮样式
+					oQylhBtn.css("color","#96cb00");
+				} else if (oScrollTop<oCyyHeight||oScrollTop>oFootHeight) {
+					//首先还原样式
+					oAllBtn.css("color","#ffffff");
+				}
+			});
+    })
+    </script>
+</body>
+</html>
